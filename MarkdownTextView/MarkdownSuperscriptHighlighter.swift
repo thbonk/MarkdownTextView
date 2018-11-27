@@ -59,11 +59,11 @@ public final class MarkdownSuperscriptHighlighter: HighlighterType {
 }
 
 private func superscriptAttributes(_ attributes: TextAttributes, level: Int, ratio: CGFloat) -> TextAttributes {
-    if let font = attributes[NSAttributedStringKey.font] as? UIFont {
+    if let font = attributes[NSAttributedString.Key.font] as? UIFont {
         let adjustedFont = UIFont(descriptor: font.fontDescriptor, size: font.pointSize * ratio)
         return [
-            NSAttributedStringKey("\(kCTSuperscriptAttributeName)"): level as AnyObject,
-            NSAttributedStringKey.font: adjustedFont
+            NSAttributedString.Key("\(kCTSuperscriptAttributeName)"): level as AnyObject,
+            NSAttributedString.Key.font: adjustedFont
         ]
     }
     return [:]

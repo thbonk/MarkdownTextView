@@ -17,8 +17,8 @@ open class HighlighterTextStorage: NSTextStorage {
     fileprivate var highlighters = [HighlighterType]()
     
     /// Default attributes to use for styling text.
-    open var defaultAttributes: [NSAttributedStringKey: Any] = [
-        NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+    open var defaultAttributes: [NSAttributedString.Key: Any] = [
+        .font: UIFont.preferredFont(forTextStyle: .body)
     ] {
         didSet { editedAll(.editedAttributes) }
     }
@@ -55,7 +55,7 @@ open class HighlighterTextStorage: NSTextStorage {
         return backingStore.string
     }
     
-    open override func attributes(at location: Int, effectiveRange range: NSRangePointer?) -> [NSAttributedStringKey : Any] {
+    open override func attributes(at location: Int, effectiveRange range: NSRangePointer?) -> [NSAttributedString.Key : Any] {
         return backingStore.attributes(at: location, effectiveRange: range)
     }
     
@@ -64,7 +64,7 @@ open class HighlighterTextStorage: NSTextStorage {
         edited(.editedCharacters, range: range, changeInLength: attrString.length - range.length)
     }
     
-    open override func setAttributes(_ attrs: [NSAttributedStringKey : Any]?, range: NSRange) {
+    open override func setAttributes(_ attrs: [NSAttributedString.Key : Any]?, range: NSRange) {
         backingStore.setAttributes(attrs, range: range)
         edited(.editedAttributes, range: range, changeInLength: 0)
     }
@@ -80,7 +80,7 @@ open class HighlighterTextStorage: NSTextStorage {
         super.processEditing()
     }
     
-    fileprivate func editedAll(_ actions: NSTextStorageEditActions) {
+    fileprivate func editedAll(_ actions: NSTextStorage.EditActions) {
         edited(actions, range: NSRange(location: 0, length: backingStore.length), changeInLength: 0)
     }
     
