@@ -26,13 +26,31 @@ class ViewController: UIViewController {
             textStorage.addHighlighter(MarkdownFencedCodeHighlighter(attributes: codeBlockAttributes))
         }
         
-        let textView = MarkdownTextView(frame: CGRectZero, textStorage: textStorage)
+        let textView = MarkdownTextView(frame: CGRect.zero, textStorage: textStorage)
         textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        
         view.addSubview(textView)
         
-        let views = ["textView": textView]
-        var constraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-20-[textView]-20-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[textView]-20-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views)
-        NSLayoutConstraint.activateConstraints(constraints)
+        if #available(iOS 11.0, *) {
+            view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: textView.topAnchor).isActive = true
+            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: textView.bottomAnchor).isActive = true
+        } else {
+            topLayoutGuide.bottomAnchor.constraint(equalTo: textView.topAnchor).isActive = true
+            bottomLayoutGuide.topAnchor.constraint(equalTo: textView.bottomAnchor).isActive = true
+        }
+        
+        view.leadingAnchor.constraint(equalTo: textView.leadingAnchor).isActive = true
+        view.trailingAnchor.constraint(equalTo: textView.trailingAnchor).isActive = true
+        
+        if
+            let filepath = Bundle.main.path(forResource: "markdown-sample", ofType: "txt"),
+            let contents = try? String(contentsOfFile: filepath)
+        {
+            textView.text = contents
+        }
+        
+        textView.keyboardDismissMode = .interactive
+
     }
 }
