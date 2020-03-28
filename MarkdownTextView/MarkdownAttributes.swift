@@ -77,7 +77,7 @@ public struct MarkdownAttributes {
     ]
     
     public var blockQuoteAttributes: TextAttributes? = [
-        .foregroundColor: UIColor.darkGray
+        .foregroundColor: UIColor.secondaryLabel
     ]
     
     public var orderedListAttributes: TextAttributes? = [
@@ -86,7 +86,7 @@ public struct MarkdownAttributes {
     
     public var orderedListItemAttributes: TextAttributes? = [
         .font: UIFont.preferredFont(forTextStyle: .body),
-        .foregroundColor: UIColor.darkGray
+        .foregroundColor: UIColor.secondaryLabel
     ]
     
     public var unorderedListAttributes: TextAttributes? = [
@@ -95,7 +95,7 @@ public struct MarkdownAttributes {
     
     public var unorderedListItemAttributes: TextAttributes? = [
         .font: UIFont.preferredFont(forTextStyle: .body),
-        .foregroundColor: UIColor.darkGray
+        .foregroundColor: UIColor.secondaryLabel
     ]
     
     public init() {}
